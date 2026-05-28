@@ -262,9 +262,45 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 .rsvp-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:18px;color:var(--text);line-height:1.7;margin:6px auto 22px;max-width:300px}
 .rsvp-deadline{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:17px;letter-spacing:.5px;color:var(--accent-deep);margin:18px 0 6px;display:block;text-align:center}
 .rsvp-deadline-lbl{font-family:'Jost',sans-serif;font-weight:500;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-deep);display:block;margin-bottom:6px;opacity:.85}
-.btn-wa{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:18px;background:#25D366;color:#FFFFFF;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-weight:600;font-size:16px;letter-spacing:.05em;padding:18px 24px;border-radius:50px;transition:transform .25s,box-shadow .25s;box-shadow:0 6px 22px rgba(37,211,102,.32)}
-.btn-wa:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.45)}
-.btn-wa svg{width:22px;height:22px;fill:currentColor;flex-shrink:0}
+/* ── RSVP FORMULARIO ── */
+.rsvp-form{display:flex;flex-direction:column;gap:16px;margin-top:20px;text-align:left}
+.rsvp-field{display:flex;flex-direction:column;gap:7px}
+.rsvp-label{font-family:'Jost',sans-serif;font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-deep);opacity:.9}
+.rsvp-input,.rsvp-select{
+  font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;
+  color:var(--text);background:var(--bg);
+  border:1px solid var(--border);border-radius:4px;
+  padding:13px 16px;width:100%;
+  outline:none;transition:border-color .25s,box-shadow .25s;
+  -webkit-appearance:none;appearance:none;
+}
+.rsvp-input:focus,.rsvp-select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(12,78,218,.10)}
+.rsvp-input::placeholder{color:var(--text-soft);opacity:.55;font-style:italic}
+.rsvp-select-wrap{position:relative}
+.rsvp-select-wrap::after{content:'';position:absolute;right:16px;top:50%;width:7px;height:7px;border-right:1.5px solid var(--gold-deep);border-bottom:1.5px solid var(--gold-deep);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.rsvp-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rsvp-opt{
+  font-family:'Jost',sans-serif;font-weight:500;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  padding:14px 6px;border-radius:4px;cursor:pointer;transition:all .22s;
+  border:1px solid var(--border);background:transparent;color:var(--text-soft);
+}
+.rsvp-opt.is-active{
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent-deep) 100%);
+  color:#fff;border-color:var(--accent);
+  box-shadow:0 4px 14px rgba(12,78,218,.28);
+}
+.btn-confirmar{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;margin-top:4px;
+  background:linear-gradient(135deg,#E5CD8B 0%,#C9A456 50%,#8F7335 100%);
+  color:#06204F;border:none;cursor:pointer;
+  font-family:'Jost',sans-serif;font-weight:700;font-size:13px;letter-spacing:.22em;text-transform:uppercase;
+  padding:18px 24px;border-radius:50px;
+  transition:transform .25s,box-shadow .25s;
+  box-shadow:0 6px 22px rgba(201,164,86,.42);
+}
+.btn-confirmar:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,164,86,.60)}
+.btn-confirmar:active{transform:translateY(0)}
 
 /* ── FOOTER ── */
 #footer{padding:72px 32px 52px;text-align:center;background:linear-gradient(175deg,#04173B 0%,#06204F 35%,#0c2a5e 65%,#04173B 100%);position:relative;overflow:visible}
@@ -861,20 +897,38 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
     <div class="rsvp-card rv">
       <div class="rsvp-badge">
         <span class="rsvp-badge-dot"></span>
-        <span class="rsvp-badge-txt">Vía WhatsApp</span>
+        <span class="rsvp-badge-txt">Fecha límite: 30 Nov 2026</span>
       </div>
       <p class="rsvp-text">
         Tu presencia es muy importante para nosotros.<br>
-        Por favor confírmanos tu asistencia para que podamos prepararlo todo con cariño.
+        Completa tu confirmación y te esperamos con todo el cariño.
       </p>
 
-      <span class="rsvp-deadline-lbl">Fecha límite</span>
-      <span class="rsvp-deadline">Lunes, 30 de Noviembre de 2026</span>
-
-      <button class="btn-wa" id="btnRsvp" type="button">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.16 5.335 5.495 0 12.05 0c3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414 0 6.557-5.336 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-        Confirmar asistencia
-      </button>
+      <div class="rsvp-form">
+        <div class="rsvp-field">
+          <label class="rsvp-label" for="rsvpNombre">Nombre</label>
+          <input class="rsvp-input" type="text" id="rsvpNombre" placeholder="Escribe tu nombre completo" autocomplete="name">
+        </div>
+        <div class="rsvp-field">
+          <label class="rsvp-label" for="rsvpPases">Número de Pases</label>
+          <div class="rsvp-select-wrap">
+            <select class="rsvp-select" id="rsvpPases">
+              <option value="1">1 persona</option>
+              <option value="2">2 personas</option>
+              <option value="3">3 personas</option>
+              <option value="4">4 personas</option>
+            </select>
+          </div>
+        </div>
+        <div class="rsvp-field">
+          <label class="rsvp-label">¿Asistirás?</label>
+          <div class="rsvp-toggle">
+            <button class="rsvp-opt is-active" id="rsvpSi" type="button">Sí asistiré</button>
+            <button class="rsvp-opt" id="rsvpNo" type="button">No asistiré</button>
+          </div>
+        </div>
+        <button class="btn-confirmar" id="btnRsvp" type="button">Confirmar asistencia</button>
+      </div>
     </div>
   </section>
 
@@ -1157,15 +1211,33 @@ function initMain(){
     });
   })();
 
-  /* ── RSVP WhatsApp único (sin pases) ── */
+  /* ── RSVP formulario: nombre + pases + sí/no → WhatsApp ── */
   (function initRsvp(){
-    var btn = document.getElementById('btnRsvp');
+    var btn   = document.getElementById('btnRsvp');
+    var btnSi = document.getElementById('rsvpSi');
+    var btnNo = document.getElementById('rsvpNo');
     if(!btn) return;
-    var phone = '5215521812589'; // formato wa.me (sin +, sin espacios)
-    var msg = '¡Hola! Con mucho gusto confirmo mi asistencia a la celebración de Lucia Cabrera & Abner Rodríguez. 🎉\n¡Nos vemos pronto! 💫';
-    var waUrl = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(msg);
+    var asiste = true;
+    if(btnSi) btnSi.addEventListener('click', function(){
+      asiste = true;
+      btnSi.classList.add('is-active');
+      if(btnNo) btnNo.classList.remove('is-active');
+    });
+    if(btnNo) btnNo.addEventListener('click', function(){
+      asiste = false;
+      btnNo.classList.add('is-active');
+      if(btnSi) btnSi.classList.remove('is-active');
+    });
     btn.addEventListener('click', function(){
-      window.open(waUrl, '_blank');
+      var nombre = ((document.getElementById('rsvpNombre')||{}).value||'').trim()||'Invitado';
+      var pases  = (document.getElementById('rsvpPases')||{}).value||'1';
+      var resp   = asiste ? 'Sí asistiré con mucho gusto 🥂' : 'Lamentablemente no podré asistir';
+      var phone  = '5215521812589';
+      var msg    = '¡Hola! Les escribo sobre la boda de Lucia Cabrera & Abner Rodríguez. 💫\n\n'
+                 + '👤 Nombre: '      + nombre + '\n'
+                 + '🎟️ Pases: '       + pases  + '\n'
+                 + '✅ ' + resp;
+      window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank');
     });
   })();
 
