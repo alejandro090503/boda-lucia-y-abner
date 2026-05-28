@@ -1093,77 +1093,63 @@ function initEnvelope(){
   setTimeout(tryAutoMusic, 400);
 })();
 
-/* ── PARTÍCULAS T1 (polen dorado + sparkles + estrellas + líneas azules) ── */
-function launchPetals(ambient){
-  var container=document.getElementById('petals');
+/* ── POLVO BRILLOSO — cae suave y continuo ── */
+function spawnMote(type,seedY){
+  var c=document.getElementById('petals');
+  var H=window.innerHeight;
+  var p=document.createElement('div');p.className='petal';
+  var x=Math.random()*100,drift=(Math.random()-.5)*55;
+  var sz,op,dur,css;
 
-  /* Polen dorado micro */
-  var dust=ambient?10:24;
-  for(var k=0;k<dust;k++){
-    (function(k){
-      setTimeout(function(){
-        var d=document.createElement('div');d.className='petal';
-        var dsz=1.5+Math.random()*2.8,dcol=Math.random()>.5?'rgba(201,164,86,0.88)':'rgba(229,205,139,0.82)';
-        d.style.cssText='left:'+Math.random()*100+'%;width:'+dsz+'px;height:'+dsz+'px;background:'+dcol+';border-radius:50%;position:absolute;top:-10px;box-shadow:0 0 4px '+dcol;
-        container.appendChild(d);
-        gsap.fromTo(d,{opacity:0,y:-10},{opacity:Math.random()*.7+.3,y:window.innerHeight+40,x:(Math.random()-.5)*70,
-          duration:7+Math.random()*5,ease:'none',onComplete:function(){d.remove()}});
-      },k*220+Math.random()*320);
-    })(k);
+  if(type==='shimmer'){
+    sz=2.2+Math.random()*2.8;op=.42+Math.random()*.42;
+    css='left:'+x+'%;width:'+sz+'px;height:'+sz+'px;background:rgba(240,218,148,.9);position:absolute;top:-10px;border-radius:50%;box-shadow:0 0 '+(sz*4)+'px rgba(229,205,139,.7),0 0 '+(sz*7)+'px rgba(201,164,86,.22)';
+    dur=11+Math.random()*9;
+  }else if(type==='sparkle'){
+    sz=2.8+Math.random()*3;op=.48+Math.random()*.4;
+    css='left:'+x+'%;width:'+sz+'px;height:'+sz+'px;background:rgba(255,248,200,.92);position:absolute;top:-10px;border-radius:1px;box-shadow:0 0 '+(sz*3)+'px rgba(229,205,139,.8)';
+    dur=12+Math.random()*8;
+  }else{
+    sz=.7+Math.random()*1.8;var shade=Math.random();
+    var col=shade>.6?'rgba(201,164,86,':shade>.25?'rgba(229,205,139,':'rgba(255,248,210,';
+    op=.28+Math.random()*.42;
+    css='left:'+x+'%;width:'+sz+'px;height:'+sz+'px;background:'+col+op.toFixed(2)+');position:absolute;top:-10px;border-radius:50%;box-shadow:0 0 '+(sz*2.5)+'px '+col+'.45)';
+    dur=9+Math.random()*8;
   }
 
-  /* Sparkles dorados diamante */
-  var sparks=ambient?3:10;
-  for(var j=0;j<sparks;j++){
-    (function(j){
-      setTimeout(function(){
-        var s=document.createElement('div');s.className='petal';
-        var sz=4+Math.random()*6;
-        s.style.cssText='left:'+Math.random()*100+'%;width:'+sz+'px;height:'+sz+'px;background:rgba(229,205,139,0.92);position:absolute;top:-20px;transform:rotate(45deg);border-radius:1px;box-shadow:0 0 '+(sz+4)+'px rgba(201,164,86,0.75)';
-        container.appendChild(s);
-        gsap.fromTo(s,{opacity:0,y:-20,scale:0},{opacity:.92,y:window.innerHeight*0.6,scale:1,rotation:Math.random()*360+180,
-          duration:3+Math.random()*2.5,ease:'power2.out',
-          onComplete:function(){gsap.to(s,{opacity:0,y:'+='+Math.round(window.innerHeight*0.55),duration:2,ease:'power1.in',onComplete:function(){s.remove()}});}});
-      },j*650+Math.random()*900+(ambient?0:300));
-    })(j);
-  }
+  p.style.cssText=css;c.appendChild(p);
+  var fromY=seedY!=null?seedY:0;
+  var totalDist=H+30;
+  var actualDur=dur*(seedY!=null?(totalDist-fromY)/totalDist:1);
 
-  /* Estrellas pequeñas (4 puntas) */
-  var stars=ambient?2:6;
-  for(var i=0;i<stars;i++){
-    (function(i){
-      setTimeout(function(){
-        var st=document.createElement('div');st.className='petal';
-        var ssz=6+Math.random()*5;
-        st.style.cssText='left:'+Math.random()*100+'%;width:'+ssz+'px;height:'+ssz+'px;position:absolute;top:-20px;background:radial-gradient(circle,rgba(229,205,139,0.95) 0%,rgba(229,205,139,0.18) 60%,transparent 70%);border-radius:50%;box-shadow:0 0 '+(ssz+2)+'px rgba(229,205,139,0.6),0 0 '+(ssz*1.5)+'px rgba(201,164,86,0.3)';
-        container.appendChild(st);
-        gsap.fromTo(st,{opacity:0,scale:0,y:-15},{opacity:.85,scale:1,y:window.innerHeight*0.55,duration:4+Math.random()*2,ease:'sine.inOut',
-          onComplete:function(){gsap.to(st,{opacity:0,y:'+='+Math.round(window.innerHeight*0.45),duration:2.5,ease:'power1.in',onComplete:function(){st.remove()}});}});
-      },i*900+Math.random()*1100);
-    })(i);
-  }
+  /* Movimiento de caída */
+  gsap.fromTo(p,{y:fromY,x:0,rotation:type==='sparkle'?Math.random()*90:0},{
+    y:totalDist,x:drift,rotation:type==='sparkle'?(Math.random()*360+120):0,
+    duration:actualDur,ease:'none',onComplete:function(){p.remove();}
+  });
+  /* Opacidad — fade in suave (propiedad independiente del movimiento) */
+  gsap.fromTo(p,{opacity:seedY!=null?op*.55:0},{
+    opacity:op,duration:seedY!=null?.01:Math.min(2,actualDur*.28),ease:'sine.out'
+  });
+}
 
-  /* Líneas verticales azules muy sutiles */
-  var lines=ambient?1:3;
-  for(var l=0;l<lines;l++){
-    (function(l){
-      setTimeout(function(){
-        var ln=document.createElement('div');ln.className='petal';
-        var lh=18+Math.random()*22;
-        ln.style.cssText='left:'+Math.random()*100+'%;width:1px;height:'+lh+'px;position:absolute;top:-20px;background:linear-gradient(to bottom,transparent,rgba(12,78,218,0.42),transparent);opacity:0';
-        container.appendChild(ln);
-        gsap.fromTo(ln,{opacity:0,y:-20},{opacity:.55,y:window.innerHeight+40,duration:8+Math.random()*4,ease:'none',
-          onComplete:function(){ln.remove()}});
-      },l*1100+Math.random()*1400);
-    })(l);
+function initDust(){
+  var H=window.innerHeight;
+  var types=['dust','dust','dust','dust','shimmer','shimmer','sparkle'];
+  /* Sembrar pantalla con partículas ya en caída para que no se vea vacía al inicio */
+  for(var i=0;i<26;i++){
+    (function(i){spawnMote(types[Math.floor(Math.random()*types.length)],Math.random()*H);})(i);
   }
+  /* Flujo continuo */
+  setInterval(function(){spawnMote('dust');},300);
+  setInterval(function(){spawnMote('shimmer');},820);
+  setInterval(function(){spawnMote('sparkle');},1500);
 }
 
 /* ── MAIN ── */
 function initMain(){
   window.scrollTo(0,0);
-  launchPetals(false);
-  setInterval(function(){launchPetals(true);},13000);
+  initDust();
 
   /* Countdown — fecha boda: 2026-12-19 18:30 zona CDMX (-06:00) */
   const target=new Date('2026-12-19T18:30:00-06:00');
