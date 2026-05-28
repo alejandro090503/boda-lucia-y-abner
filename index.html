@@ -461,6 +461,33 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
   .gift-msg{font-size:18px}
   .album-msg{font-size:18px}
 }
+
+/* ── DISSOLVE SUAVE ENTRE SECCIONES ── */
+/* mask-image en gradiente: los bordes se desvanecen en lugar de cortarse */
+#hero{
+  -webkit-mask-image:linear-gradient(to bottom,black 0%,black 88%,transparent 100%);
+  mask-image:linear-gradient(to bottom,black 0%,black 88%,transparent 100%);
+}
+#kids{
+  -webkit-mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 60px),transparent 100%);
+  mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 60px),transparent 100%);
+}
+#regalos{
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,black 60px,black 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,black 60px,black 100%);
+}
+#album{
+  -webkit-mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 60px),transparent 100%);
+  mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 60px),transparent 100%);
+}
+#rsvp{
+  -webkit-mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 52px),transparent 100%);
+  mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 52px),transparent 100%);
+}
+#footer{
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,black 52px,black 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,black 52px,black 100%);
+}
 </style>
 </head>
 <body>
