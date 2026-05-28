@@ -521,6 +521,16 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
   -webkit-mask-image:linear-gradient(to bottom,transparent 0,black 52px,black 100%);
   mask-image:linear-gradient(to bottom,transparent 0,black 52px,black 100%);
 }
+/* ── DARK → DARK adjacentes: Regalos + Álbum ── */
+/* Ambas son secciones navy consecutivas — eliminar fade entre ellas para evitar stripe blanco */
+#regalos{
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,black 52px,black 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,black 52px,black 100%);
+}
+#album{
+  -webkit-mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 52px),transparent 100%);
+  mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 52px),transparent 100%);
+}
 </style>
 </head>
 <body>
