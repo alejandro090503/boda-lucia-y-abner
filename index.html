@@ -203,13 +203,19 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 .env-seal{position:absolute;top:42%;left:50%;width:46px;height:46px;transform:translate(-50%,-50%);background:radial-gradient(circle at 30% 30%,#E5CD8B,#8F2A3E 70%);border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;z-index:4;transition:opacity .4s ease,transform .4s ease}
 .env-seal svg{width:24px;height:24px;fill:rgba(255,255,255,.92)}
 .env-3d.is-open .env-seal{opacity:0;transform:translate(-50%,-50%) scale(.6)}
-/* Carta que sale */
-.env-letter{position:absolute;left:8%;top:18%;width:84%;height:78%;background:linear-gradient(180deg,#FBF7EC 0%,#F0E8D2 100%);border:1px solid rgba(143,115,53,.45);border-radius:3px;opacity:0;z-index:3;transform:translateY(0) scale(.96);transition:opacity .5s ease .5s,transform .9s cubic-bezier(.2,.7,.2,1) .4s;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+/* Carta interior — se revela dentro del sobre al abrirse, sin salir */
+.env-letter{position:absolute;left:8%;top:18%;width:84%;height:78%;background:linear-gradient(180deg,#FBF7EC 0%,#F0E8D2 100%);border:1px solid rgba(143,115,53,.45);border-radius:3px;opacity:0;z-index:3;transform:translateY(10px) scale(.92);transition:opacity .65s ease .55s,transform .85s cubic-bezier(.2,.85,.2,1) .45s;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;box-shadow:0 6px 16px rgba(0,0,0,.3)}
 .env-letter::before{content:'';position:absolute;inset:5px;border:1px solid rgba(143,115,53,.25);border-radius:2px;pointer-events:none}
 .env-letter-mono{font-family:'Great Vibes',cursive;font-size:30px;color:#8F7335;line-height:1;margin-bottom:6px}
 .env-letter-line{width:36px;height:1px;background:linear-gradient(to right,transparent,#8F7335,transparent);opacity:.55;margin:4px 0}
 .env-letter-tag{font-family:'Jost',sans-serif;font-weight:500;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:#8F7335;opacity:.7}
-.env-3d.is-open .env-letter{opacity:1;transform:translateY(-60%) scale(1)}
+/* Carta permanece dentro del sobre — funde suavemente sin traslape con el título */
+.env-3d.is-open .env-letter{opacity:1;transform:translateY(0) scale(.98)}
+/* Halo dorado que emana al abrir */
+.env-3d.is-open::after{content:'';position:absolute;inset:-14px;border-radius:12px;background:radial-gradient(ellipse at 50% 60%,rgba(229,205,139,.22) 0%,rgba(201,164,86,.08) 55%,transparent 75%);pointer-events:none;animation:envHalo 1.2s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes envHalo{0%{opacity:0;transform:scale(.85)}60%{opacity:1}100%{opacity:.7;transform:scale(1.04)}}
+/* Gift-frame: reveal más premium con glow sutil */
+.gift-frame.is-revealed{opacity:1;transform:translateY(0);box-shadow:0 0 32px rgba(201,164,86,.14),0 8px 28px rgba(0,0,0,.22)}
 /* CTA "Toca para abrir" */
 .env-cta{margin-top:22px;font-family:'Jost',sans-serif;font-weight:500;font-size:12px;letter-spacing:.45em;text-transform:uppercase;color:var(--gold-light);position:relative;padding:12px 28px;border:1px solid rgba(229,205,139,.42);border-radius:50px;background:rgba(229,205,139,.06);transition:opacity .4s ease,transform .4s ease}
 .env-cta::before{content:'';position:absolute;inset:0;border-radius:50px;animation:envCtaPulse 2.4s ease-out infinite}
@@ -498,28 +504,19 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
   .album-msg{font-size:18px}
 }
 
-/* ── DISSOLVE SUAVE ENTRE SECCIONES ── */
-/* mask-image en gradiente: los bordes se desvanecen en lugar de cortarse */
+/* ── DISSOLVE UNIVERSAL — TODAS LAS SECCIONES ── */
+/* Bordes difuminados en TODAS las secciones: transiciones suaves sin cortes abruptos */
+.wrap > section,
+.wrap > footer{
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,black 52px,black calc(100% - 52px),transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,black 52px,black calc(100% - 52px),transparent 100%);
+}
+/* Hero: solo borde inferior — es el primer elemento, arriba debe ser sharp */
 #hero{
   -webkit-mask-image:linear-gradient(to bottom,black 0%,black 88%,transparent 100%);
   mask-image:linear-gradient(to bottom,black 0%,black 88%,transparent 100%);
 }
-#kids{
-  -webkit-mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 60px),transparent 100%);
-  mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 60px),transparent 100%);
-}
-#regalos{
-  -webkit-mask-image:linear-gradient(to bottom,transparent 0,black 60px,black 100%);
-  mask-image:linear-gradient(to bottom,transparent 0,black 60px,black 100%);
-}
-#album{
-  -webkit-mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 60px),transparent 100%);
-  mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 60px),transparent 100%);
-}
-#rsvp{
-  -webkit-mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 52px),transparent 100%);
-  mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 52px),transparent 100%);
-}
+/* Footer: solo borde superior — es el último elemento */
 #footer{
   -webkit-mask-image:linear-gradient(to bottom,transparent 0,black 52px,black 100%);
   mask-image:linear-gradient(to bottom,transparent 0,black 52px,black 100%);
