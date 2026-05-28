@@ -468,6 +468,10 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 /* Asegurar el contenido por encima del beam */
 #regalos > *:not(.sec-beam),
 #album > *:not(.sec-beam){position:relative;z-index:2}
+/* Título "Lluvia de Sobres" siempre por encima del flap del sobre interactivo */
+#regalos .eyebrow,
+#regalos .heading,
+#regalos .orn{position:relative;z-index:10}
 .hero-desliza{position:absolute;bottom:50px;left:50%;transform:translateX(-50%);font-family:'Italiana',serif;font-size:clamp(20px,6.5vw,44px);letter-spacing:clamp(.38em,.7vw,.55em);text-transform:uppercase;color:rgba(229,205,139,.06);pointer-events:none;z-index:1;white-space:nowrap;animation:deslizaPulse 4.5s ease-in-out infinite}
 @keyframes deslizaPulse{0%,100%{opacity:.45}50%{opacity:1}}
 
