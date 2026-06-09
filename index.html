@@ -106,6 +106,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 .hero-content{position:relative;z-index:2;text-align:center;padding:0 32px}
 .hero-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:17px;letter-spacing:.2em;text-transform:uppercase;color:#E5CD8B;display:block;margin-bottom:20px;text-shadow:0 1px 10px rgba(0,0,0,.7)}
 .hero-bride,.hero-groom{font-family:'Great Vibes',cursive;font-size:clamp(68px,21vw,98px);color:#FFFFFF;line-height:1;display:block;text-shadow:0 2px 20px rgba(0,0,0,.45),0 1px 6px rgba(0,0,0,.35)}
+.hero-groom::first-letter{font-size:1.18em}
 .hero-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:40px;color:#E5CD8B;display:block;margin:.12em 0;text-shadow:0 1px 10px rgba(0,0,0,.6)}
 .hero-date{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:22px;letter-spacing:4px;color:#E5CD8B;margin-top:22px;display:block;text-shadow:0 1px 10px rgba(0,0,0,.7)}
 
@@ -165,74 +166,6 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 .dc-col-ttl{font-family:'Jost',sans-serif;font-weight:500;font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--dark);margin-top:14px}
 .dc-avoid-lbl{font-family:'Jost',sans-serif;font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-deep);text-align:center;display:block;margin:20px 0 12px}
 
-/* ── KIDS POLICY (OBLIGATORIA) ── */
-#kids{background:var(--card);position:relative}
-.kids-card{max-width:380px;margin:0 auto;border:1px solid var(--border-gold);border-radius:4px;padding:32px 28px;position:relative;background:rgba(244,247,253,.55)}
-.kids-card::before{content:'';position:absolute;inset:8px;border:1px solid var(--border-light);pointer-events:none;border-radius:2px}
-.kids-icon{display:flex;justify-content:center;margin-bottom:18px}
-.kids-icon svg{stroke:var(--gold);stroke-width:1.3;fill:rgba(201,164,86,.08);width:46px;height:46px}
-.kids-text{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:18px;line-height:1.7;color:var(--text);text-align:center}
-.kids-text em{font-style:italic;color:var(--accent-deep);font-weight:700}
-
-/* ── REGALOS (lluvia de sobres) ── */
-#regalos{background:linear-gradient(160deg,#06204F 0%,#0042a9 55%,#06204F 100%);overflow:hidden;position:relative}
-#regalos::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 55% at 50% 10%,rgba(201,164,86,.10) 0%,transparent 70%)}
-#regalos .eyebrow{color:var(--gold-light);opacity:.85}
-#regalos .heading{color:var(--gold-light)}
-#regalos .sub{color:rgba(229,205,139,.78)}
-/* ── SOBRE INTERACTIVO LLUVIA DE SOBRES ── */
-.env-stage{display:flex;flex-direction:column;align-items:center;margin:24px auto 0;max-width:360px;position:relative;z-index:1}
-.env-3d{position:relative;width:240px;height:170px;cursor:pointer;perspective:900px;filter:drop-shadow(0 16px 30px rgba(0,0,0,.45)) drop-shadow(0 0 22px rgba(201,164,86,.18));transition:transform .35s ease}
-.env-3d:hover{transform:translateY(-4px)}
-.env-3d.is-open{cursor:default}
-.env-3d.is-open:hover{transform:none}
-.env-body{position:absolute;inset:0;background:linear-gradient(160deg,#E5CD8B 0%,#C9A456 55%,#8F7335 100%);border-radius:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),inset 0 -6px 18px rgba(0,0,0,.25)}
-.env-body::before{content:'';position:absolute;inset:0;border-radius:6px;background:linear-gradient(135deg,transparent 35%,rgba(255,255,255,.08) 50%,transparent 65%);pointer-events:none}
-/* Triangulos del cuerpo (V interior) */
-.env-tri-l,.env-tri-r{position:absolute;top:0;width:50%;height:100%;background:linear-gradient(135deg,#A88840 0%,#8F7335 100%);clip-path:polygon(0 0,100% 50%,0 100%)}
-.env-tri-l{left:0}
-.env-tri-r{right:0;transform:scaleX(-1)}
-.env-bottom{position:absolute;left:0;right:0;bottom:0;height:60%;background:linear-gradient(180deg,#C9A456 0%,#8F7335 100%);clip-path:polygon(0 100%,50% 0,100% 100%);box-shadow:inset 0 -4px 8px rgba(0,0,0,.2)}
-/* Flap superior — rota al abrir */
-.env-flap{position:absolute;top:0;left:0;width:100%;height:60%;transform-origin:top center;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.25,.85,.35,1.05),opacity .5s ease .8s;z-index:5}
-.env-flap-front,.env-flap-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.env-flap-front{background:linear-gradient(180deg,#E5CD8B 0%,#C9A456 100%);clip-path:polygon(0 0,100% 0,50% 100%);box-shadow:inset 0 -2px 6px rgba(0,0,0,.15)}
-.env-flap-back{background:linear-gradient(180deg,#8F7335 0%,#6F5A26 100%);clip-path:polygon(0 0,100% 0,50% 100%);transform:rotateX(180deg);box-shadow:inset 0 -2px 6px rgba(0,0,0,.25)}
-.env-3d.is-open .env-flap{transform:rotateX(-178deg);opacity:0}
-/* Sello de corazón (lacre) */
-.env-seal{position:absolute;top:42%;left:50%;width:46px;height:46px;transform:translate(-50%,-50%);background:radial-gradient(circle at 30% 30%,#E5CD8B,#8F2A3E 70%);border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;z-index:4;transition:opacity .4s ease,transform .4s ease}
-.env-seal svg{width:24px;height:24px;fill:rgba(255,255,255,.92)}
-.env-3d.is-open .env-seal{opacity:0;transform:translate(-50%,-50%) scale(.6)}
-/* Carta interior — se revela dentro del sobre al abrirse, sin salir */
-.env-letter{position:absolute;left:8%;top:18%;width:84%;height:78%;background:linear-gradient(180deg,#FBF7EC 0%,#F0E8D2 100%);border:1px solid rgba(143,115,53,.45);border-radius:3px;opacity:0;z-index:3;transform:translateY(10px) scale(.92);transition:opacity .65s ease .55s,transform .85s cubic-bezier(.2,.85,.2,1) .45s;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 12px;box-shadow:0 6px 16px rgba(0,0,0,.3)}
-.env-letter::before{content:'';position:absolute;inset:5px;border:1px solid rgba(143,115,53,.25);border-radius:2px;pointer-events:none}
-.env-letter-mono{font-family:'Great Vibes',cursive;font-size:30px;color:#8F7335;line-height:1;margin-bottom:6px}
-.env-letter-line{width:36px;height:1px;background:linear-gradient(to right,transparent,#8F7335,transparent);opacity:.55;margin:4px 0}
-.env-letter-tag{font-family:'Jost',sans-serif;font-weight:500;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:#8F7335;opacity:.7}
-/* Carta permanece dentro del sobre — funde suavemente sin traslape con el título */
-.env-3d.is-open .env-letter{opacity:1;transform:translateY(0) scale(.98)}
-/* Halo dorado que emana al abrir */
-.env-3d.is-open::after{content:'';position:absolute;inset:-14px;border-radius:12px;background:radial-gradient(ellipse at 50% 60%,rgba(229,205,139,.22) 0%,rgba(201,164,86,.08) 55%,transparent 75%);pointer-events:none;animation:envHalo 1.2s cubic-bezier(.2,.8,.2,1) forwards}
-@keyframes envHalo{0%{opacity:0;transform:scale(.85)}60%{opacity:1}100%{opacity:.7;transform:scale(1.04)}}
-/* Gift-frame: reveal más premium con glow sutil */
-.gift-frame.is-revealed{opacity:1;transform:translateY(0);box-shadow:0 0 32px rgba(201,164,86,.14),0 8px 28px rgba(0,0,0,.22)}
-/* CTA "Toca para abrir" */
-.env-cta{margin-top:22px;font-family:'Jost',sans-serif;font-weight:500;font-size:12px;letter-spacing:.45em;text-transform:uppercase;color:var(--gold-light);position:relative;padding:12px 28px;border:1px solid rgba(229,205,139,.42);border-radius:50px;background:rgba(229,205,139,.06);transition:opacity .4s ease,transform .4s ease}
-.env-cta::before{content:'';position:absolute;inset:0;border-radius:50px;animation:envCtaPulse 2.4s ease-out infinite}
-@keyframes envCtaPulse{0%{box-shadow:0 0 0 0 rgba(229,205,139,.32)}70%{box-shadow:0 0 0 14px rgba(229,205,139,0)}100%{box-shadow:0 0 0 0 rgba(229,205,139,0)}}
-.env-3d.is-open ~ .env-cta{opacity:0;transform:translateY(-6px);pointer-events:none}
-/* Mensaje revelado */
-.gift-frame{border:1px solid rgba(201,164,86,.30);border-radius:4px;padding:32px 26px 30px;max-width:340px;margin:32px auto 0;position:relative;background:rgba(255,255,255,.05);z-index:1;display:none;opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
-.gift-frame.is-mounted{display:block}
-.gift-frame.is-revealed{opacity:1;transform:translateY(0)}
-.gift-frame::before{content:'';position:absolute;inset:7px;border:1px solid rgba(201,164,86,.12);pointer-events:none}
-.g-corner{position:absolute;width:12px;height:12px;border-color:rgba(201,164,86,.6);border-style:solid;border-width:0}
-.g-corner.tl{top:3px;left:3px;border-top-width:1px;border-left-width:1px}
-.g-corner.tr{top:3px;right:3px;border-top-width:1px;border-right-width:1px}
-.g-corner.bl{bottom:3px;left:3px;border-bottom-width:1px;border-left-width:1px}
-.g-corner.br{bottom:3px;right:3px;border-bottom-width:1px;border-right-width:1px}
-.gift-msg{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:19px;line-height:1.8;color:rgba(255,255,255,.94);text-align:center;margin:0 auto;max-width:320px}
-.gift-msg strong{display:block;font-family:'Great Vibes',cursive;font-style:normal;font-weight:400;font-size:34px;color:var(--gold-light);margin-bottom:10px;line-height:1.2}
 
 /* ── ÁLBUM ── */
 #album{background:linear-gradient(200deg,#0c2a5e 0%,#0042a9 55%,#06204F 100%);overflow:hidden;position:relative}
@@ -466,12 +399,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 .sec-beam.beam-delay::before{animation-delay:5.5s}
 @keyframes secBeam{0%{left:-65%}55%{left:130%}100%{left:130%}}
 /* Asegurar el contenido por encima del beam */
-#regalos > *:not(.sec-beam),
 #album > *:not(.sec-beam){position:relative;z-index:2}
-/* Título "Lluvia de Sobres" siempre por encima del flap del sobre interactivo */
-#regalos .eyebrow,
-#regalos .heading,
-#regalos .orn{position:relative;z-index:10}
 .hero-desliza{position:absolute;bottom:50px;left:50%;transform:translateX(-50%);font-family:'Italiana',serif;font-size:clamp(20px,6.5vw,44px);letter-spacing:clamp(.38em,.7vw,.55em);text-transform:uppercase;color:rgba(229,205,139,.06);pointer-events:none;z-index:1;white-space:nowrap;animation:deslizaPulse 4.5s ease-in-out infinite}
 @keyframes deslizaPulse{0%,100%{opacity:.45}50%{opacity:1}}
 
@@ -524,16 +452,6 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 #footer{
   -webkit-mask-image:linear-gradient(to bottom,transparent 0,black 52px,black 100%);
   mask-image:linear-gradient(to bottom,transparent 0,black 52px,black 100%);
-}
-/* ── DARK → DARK adjacentes: Regalos + Álbum ── */
-/* Ambas son secciones navy consecutivas — eliminar fade entre ellas para evitar stripe blanco */
-#regalos{
-  -webkit-mask-image:linear-gradient(to bottom,transparent 0,black 52px,black 100%);
-  mask-image:linear-gradient(to bottom,transparent 0,black 52px,black 100%);
-}
-#album{
-  -webkit-mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 52px),transparent 100%);
-  mask-image:linear-gradient(to bottom,black 0%,black calc(100% - 52px),transparent 100%);
 }
 </style>
 </head>
@@ -591,7 +509,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
       Sábado, 19 de Diciembre de 2026<br>
       Estado de México
     </p>
-    <p class="invite-verse stagger-child">Que cada estrella del cielo<br>sea testigo de este día,<br>donde dos vidas eligen,<br>para siempre, ser una sola.</p>
+    <p class="invite-verse stagger-child">«Más valen dos que uno, porque obtienen más fruto de su esfuerzo. Si caen, el uno levanta al otro…»<br><span style="font-family:'Jost',sans-serif;font-size:13px;font-style:normal;letter-spacing:.22em;opacity:.7">Eclesiastés 4:9-12</span></p>
   </section>
 
   <!-- CUENTA REGRESIVA -->
@@ -809,70 +727,6 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
     <p class="gal-hint rv">Desliza para ver más</p>
   </section>
 
-  <!-- KIDS POLICY (OBLIGATORIA) -->
-  <section id="kids" class="sec rv" style="text-align:center">
-    <span class="eyebrow">Solo Adultos</span>
-    <h2 class="heading-sm">Una Noche para Compartir</h2>
-    <div class="orn" style="margin-top:16px"><div class="orn-line"></div><div class="orn-diamond-sm"></div><div class="orn-diamond"></div><div class="orn-diamond-sm"></div><div class="orn-line"></div></div>
-    <div class="kids-card rv" style="margin-top:24px">
-      <div class="kids-icon">
-        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M16 8 L16 22 C16 28 20 31 24 31 C28 31 32 28 32 22 L32 8 Z" stroke-linejoin="round"/>
-          <line x1="24" y1="31" x2="24" y2="40" stroke-linecap="round"/>
-          <line x1="16" y1="40" x2="32" y2="40" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <p class="kids-text">
-        Con todo el cariño, hemos decidido que nuestra celebración sea <em>exclusiva para adultos.</em>
-        <br><br>
-        Confiamos en que puedas disfrutar esta noche con nosotros sin preocupaciones.<br>
-        Gracias por tu comprensión.
-      </p>
-    </div>
-  </section>
-
-  <!-- MESA DE REGALOS (lluvia de sobres) -->
-  <section id="regalos" class="sec rv" style="text-align:center">
-    <div class="sec-beam" aria-hidden="true"></div>
-    <span class="eyebrow">Mesa de Regalos</span>
-    <h2 class="heading">Lluvia de Sobres</h2>
-    <div class="orn" style="margin-top:14px;margin-bottom:0"><div class="orn-line" style="background:linear-gradient(to right,transparent,rgba(229,205,139,.5),transparent)"></div><div class="orn-diamond-sm" style="background:var(--gold-light)"></div><div class="orn-diamond" style="background:var(--gold-light)"></div><div class="orn-diamond-sm" style="background:var(--gold-light)"></div><div class="orn-line" style="background:linear-gradient(to right,transparent,rgba(229,205,139,.5),transparent)"></div></div>
-
-    <div class="env-stage rv">
-      <div class="env-3d" id="giftEnvelope" role="button" tabindex="0" aria-label="Toca para abrir el sobre">
-        <div class="env-body">
-          <div class="env-tri-l"></div>
-          <div class="env-tri-r"></div>
-          <div class="env-bottom"></div>
-        </div>
-        <div class="env-letter" aria-hidden="true">
-          <div class="env-letter-mono">L &amp; A</div>
-          <div class="env-letter-line"></div>
-          <div class="env-letter-tag">19 · XII · 2026</div>
-          <div class="env-letter-line"></div>
-        </div>
-        <div class="env-flap">
-          <div class="env-flap-back"></div>
-          <div class="env-flap-front"></div>
-        </div>
-        <div class="env-seal">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.7A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
-        </div>
-      </div>
-      <span class="env-cta" id="giftEnvelopeCta">Toca para abrir</span>
-    </div>
-
-    <div class="gift-frame" id="giftFrame">
-      <div class="g-corner tl"></div><div class="g-corner tr"></div>
-      <div class="g-corner bl"></div><div class="g-corner br"></div>
-      <p class="gift-msg">
-        <strong>Tu presencia es nuestro regalo</strong>
-        Si además deseas obsequiarnos algo,
-        recibiremos con infinita gratitud
-        tu sobre el día del evento.
-      </p>
-    </div>
-  </section>
 
   <!-- ÁLBUM COMPARTIDO -->
   <section id="album" class="sec rv" style="text-align:center">
@@ -1192,34 +1046,6 @@ function initMain(){
     });
   });
 
-  /* ── SOBRE INTERACTIVO LLUVIA DE SOBRES ── */
-  (function initGiftEnvelope(){
-    var env = document.getElementById('giftEnvelope');
-    var cta = document.getElementById('giftEnvelopeCta');
-    var frame = document.getElementById('giftFrame');
-    if(!env || !frame) return;
-    var opened = false;
-    function open(){
-      if(opened) return;
-      opened = true;
-      env.classList.add('is-open');
-      env.setAttribute('aria-expanded','true');
-      if(cta){ cta.style.opacity='0'; cta.style.pointerEvents='none'; }
-      setTimeout(function(){
-        frame.classList.add('is-mounted');
-        /* Two RAFs ensure the browser commits display:block before transitioning opacity/transform */
-        requestAnimationFrame(function(){
-          requestAnimationFrame(function(){
-            frame.classList.add('is-revealed');
-          });
-        });
-      }, 650);
-    }
-    env.addEventListener('click', open);
-    env.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(); }
-    });
-  })();
 
   /* ── RSVP formulario: nombre + pases + sí/no → WhatsApp ── */
   (function initRsvp(){
